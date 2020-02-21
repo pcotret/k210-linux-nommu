@@ -57,11 +57,10 @@ export PATH=/opt/riscv64-uclibc/bin:$PATH
 
 ### Busybox
 
-This busybox clone from [git://git.busybox.net/busybox.git](git://git.busybox.net/busybox.git). It is also in this repository as a submodule
-
-I modified the ``$PROJ_ROOT/busybox/configs/k210_nommu_defconfig`` file to fit k210 nommu linux.
+This busybox clone from [git://git.busybox.net/busybox.git](git://git.busybox.net/busybox.git). It is also in this repository as a submodule. However, we also need a defconfig for the K210. Thanks to [vowstar](file:///home/user/Documents/k210-linux-nommu/k210_nommu_defconfig), we have it.
 
 ```bash
+mv patches/k210_nommu_defconfig busybox/configs
 export PATH=/opt/riscv64-uclibc/bin:$PATH
 cd "$PROJ_ROOT/busybox"
 make k210_nommu_defconfig
