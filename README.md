@@ -8,62 +8,23 @@ This is a tutorial for beginners, mainly describes how to compile the kernel to 
 
 Before build, you should clone this project first and install the packages that buildroot depends on.
 
-### Debian bullseye or Ubuntu 18.04.4
+### Ubuntu dependencies
 
 ```bash
-DEBIAN_FRONTEND=noninteractive apt-get update -qq && \
-DEBIAN_FRONTEND=noninteractive apt-get install -yq \
-    build-essential \
-    device-tree-compiler \
-    bison \
-    flex \
-    file \
-    git \
-    curl \
-    wget \
-    cpio \
-    python \
-    unzip \
-    rsync \
-    bc
-```
-
-### Fedora 31 or CentOS 8
-
-```bash
-RUN dnf -y update && \
-    dnf -y groupinstall 'Development Tools' && \
-    dnf -y --enablerepo=PowerTools install \
-        autoconf \
-        gperf \
-        bison \
-        flex \
-        wget \
-        curl \
-        git \
-        python36 \
-        perl \
-        sudo \
-        cpio
+sudo apt install -yq build-essential device-tree-compiler bison flex file git curl wget cpio python unzip rsync bc
 ```
 
 ### Git clone
 
 ```bash
 git clone https://github.com/vowstar/k210-linux-nommu.git
-
 cd k210-linux-nommu
-
 export PROJ_ROOT=$(pwd)
 ```
 
 ## Buildroot
 
-First we need to compile the toolchain, according to the description of Damien Le Moal's k210 patch, the toolchain can be obtained through [modified buildroot](https://github.com/damien-lemoal/riscv64-nommu-buildroot). Originally planned to be added as a git submodule, but some people said that this is a tutorial for beginners, so the [buildroot source code](./riscv64-nommu-buildroot) was added to this project.
-
-Original buildroot by Damien Le Moal @damien-lemoal:
-
-https://github.com/damien-lemoal/riscv64-nommu-buildroot
+First we need to compile the toolchain, according to the description of Damien Le Moal's k210 patch, the toolchain can be obtained through [modified buildroot](https://github.com/damien-lemoal/riscv64-nommu-buildroot). It is also in this repository as a submodule.
 
 ### Move kernel
 
@@ -76,9 +37,7 @@ sh ./prepare_buildroot.sh
 
 ### Build toolchain
 
-Before build kernel, we should build riscv64 nommu uClibc toolchain first.
-
-This process needs to ensure a good network connection. A lot of software is downloaded when compiling.
+Before build kernel, we should build riscv64 nommu uClibc toolchain first. This process needs to ensure a good network connection. A lot of software is downloaded when compiling.
 
 ```bash
 cd "$PROJ_ROOT/riscv64-nommu-buildroot"
@@ -98,7 +57,7 @@ export PATH=/opt/riscv64-uclibc/bin:$PATH
 
 ### Busybox
 
-This busybox clone from git://git.busybox.net/busybox.git. Originally planned to be added as a git submodule, but some people said that this is a tutorial for beginners, so the [busybox source code](./busybox) was added to this project.
+This busybox clone from [git://git.busybox.net/busybox.git](git://git.busybox.net/busybox.git). It is also in this repository as a submodule
 
 I modified the ``$PROJ_ROOT/busybox/configs/k210_nommu_defconfig`` file to fit k210 nommu linux.
 
@@ -117,7 +76,7 @@ After install, all the data installed to ``$PROJ_ROOT/rootfs_k210``
 C Scripting Everywhere - The Smallest ANSI C compiler. We have a wish is to have a C compiler on k210 that can develop k210 C programs. 
 So we cross-compiled tcc. This process is done by [@minux](https://github.com/minux) and me together.
 
-The Tiny C Compiler source code from https://github.com/mirror/tinycc.git. Originally planned to be added as a git submodule, but some people said that this is a tutorial for beginners, so the [tinycc source code](./tinycc) was added to this project.
+The Tiny C Compiler source code from https://github.com/mirror/tinycc.git. It is also in this repository as a submodule
 
 ```bash
 export PATH=/opt/riscv64-uclibc/bin:$PATH
