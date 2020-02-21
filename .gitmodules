@@ -1,0 +1,3 @@
+[submodule "riscv64-nommu-buildroot"]
+	path = riscv64-nommu-buildroot
+	url = https://github.com/damien-lemoal/riscv64-nommu-buildroot
