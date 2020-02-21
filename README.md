@@ -17,7 +17,7 @@ sudo apt install -yq build-essential device-tree-compiler bison flex file git cu
 ### Git clone
 
 ```bash
-git clone https://github.com/vowstar/k210-linux-nommu.git
+git clone --recursive https://github.com/pcotret/k210-linux-nommu.git
 cd k210-linux-nommu
 export PROJ_ROOT=$(pwd)
 ```
